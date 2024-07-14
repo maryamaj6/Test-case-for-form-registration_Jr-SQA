@@ -1,0 +1,23 @@
+# Test Cases and Scenarios for Registration Form
+
+## Test Cases
+
+| Testcase # | Description               | Pre-condition                    | Test Steps                                                          | Expected Result                                  | Actual Result                                | Test Status | Test Iteration | Bug Id |
+|------------|---------------------------|----------------------------------|---------------------------------------------------------------------|---------------------------------------------------|-----------------------------------------------|-------------|----------------|--------|
+| TC-01      | Successful Registration   | User is on registration page     | 1. Enter valid details in all fields<br>2. Click Submit button       | User is registered and redirected to success page | User is redirected to success page            | Pass        | 1              | N/A    |
+| TC-02      | Invalid Email Format      | User is on registration page     | 1. Enter invalid email format<br>2. Click Submit button             | Error message displays for invalid email format   | Error message displayed for invalid email format | Pass        | 1              | N/A    |
+| TC-03      | Passwords Do Not Match    | User is on registration page     | 1. Enter different passwords in Password and Confirm Password fields<br>2. Click Submit button | Error message displays for passwords not matching | Error message displayed for passwords not matching | Pass        | 1              | N/A    |
+
+## Scenario Identification
+
+| Scenario ID | Scenario Description         | Steps                                                            | Expected Outcome                                   |
+|-------------|-----------------------------|------------------------------------------------------------------|----------------------------------------------------|
+| SC-01       | Successful Registration     | 1. Enter valid details in all fields<br>2. Submit form           | User successfully registered                      |
+| SC-02       | Minimum Required Fields     | 1. Enter mandatory fields only<br>2. Submit form                | User successfully registered with minimum data    |
+| SC-03       | Invalid Email Format        | 1. Enter email without '@' symbol<br>2. Submit form             | Error message displayed for invalid email format  |
+| SC-04       | Passwords Do Not Match      | 1. Enter different passwords<br>2. Submit form                  | Error message displayed for passwords not matching |
+
+## Additional Information
+- Ensure thorough validation of form inputs including edge cases.
+- Verify the behavior of the form under different scenarios and browser compatibility.
+- These test cases and scenarios assume a stable backend environment for form submission.
