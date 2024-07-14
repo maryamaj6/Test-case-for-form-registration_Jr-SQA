@@ -1,0 +1,33 @@
+//Scenario 1: Successful Registration//
+
+describe('Successful Registration', () => {
+  it('Registers with valid inputs', () => {
+    cy.visit('/register');
+    cy.get('#fullName').type('John Doe');
+    cy.get('#email').type('johndoe@example.com');
+    cy.get('#password').type('securePassword');
+    cy.get('#confirmPassword').type('securePassword');
+    cy.get('#dob').type('1990-01-01');
+    cy.get('#gender').select('Male');
+    cy.get('#newsletter').check();
+    cy.get('#submitBtn').click();
+    // Assert registration success, e.g., check URL or success message
+    cy.url().should('include', '/success');
+  });
+});
+
+
+//Scenario 2: Minimum Required Fields//
+
+describe('Minimum Required Fields', () => {
+  it('Registers with minimum required fields', () => {
+    cy.visit('/register');
+    cy.get('#fullName').type('Jane Smith');
+    cy.get('#email').type('janesmith@example.com');
+    cy.get('#password').type('simplePW');
+    cy.get('#confirmPassword').type('simplePW');
+    cy.get('#submitBtn').click();
+    // Assert registration success, e.g., check URL or success message
+    cy.url().should('include', '/success');
+  });
+});
