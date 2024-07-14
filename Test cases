@@ -1,0 +1,84 @@
+# Test Plan for Registration Form Testing
+
+## Introduction
+This test plan outlines the approach and strategy for testing the registration form of a website. The goal is to ensure that the form functions correctly, validates inputs, and successfully submits data to the server.
+
+## Objectives
+- Validate all fields of the registration form for correct behavior and error handling.
+- Ensure the form submits data correctly to the server upon correct completion.
+- Verify that appropriate error messages are displayed for invalid inputs.
+
+## Scope
+- Functional testing of the registration form.
+- Validation of input fields (e.g., full name, email, password).
+- Confirmation of data submission and error handling.
+
+## Test Environment
+- **Operating System:** Windows 10
+- **Browsers:** Chrome, Firefox, Safari
+- **Testing Tool:** Cypress for automated testing
+- **Server Environment:** Staging server URL
+
+## Test Data
+- Valid and invalid entries for each input field.
+- Different date of birth formats.
+- Various combinations of gender selection.
+- Test cases covering newsletter subscription (both yes and no).
+
+## Test Scenarios
+- **Positive Scenarios:**
+  - Successful registration with all valid inputs.
+  - Registration with only mandatory fields filled.
+  
+- **Negative Scenarios:**
+  - Registration with invalid email format.
+  - Registration with passwords that do not match.
+
+## Risks and Assumptions
+- **Risks:** Changes in form requirements during testing.
+- **Assumptions:** The backend API for form submission is stable and returns expected responses.
+
+---
+
+# Test Cases
+
+| Testcase # | Description                    | Pre-requisite(s)             | Steps to Follow                                                      | Expected Outcome                                   | Actual Result | Test Status | Test Iteration | Bug Id |
+|------------|--------------------------------|------------------------------|----------------------------------------------------------------------|----------------------------------------------------|---------------|-------------|----------------|--------|
+| TC_REG_001 | Successful Registration        | User is on registration page | 1. Enter valid details in all fields<br>2. Click Submit button       | User is registered and redirected to success page |               |             |                |        |
+| TC_REG_002 | Invalid Email Format           | User is on registration page | 1. Enter invalid email format<br>2. Click Submit button             | Error message displays for invalid email format      |               |             |                |        |
+| TC_REG_003 | Passwords Do Not Match         | User is on registration page | 1. Enter different passwords in Password and Confirm Password fields<br>2. Click Submit button | Error message displays for passwords not matching |               |             |                |        |
+
+---
+
+# Scenario Identification
+
+| Scenario ID | Scenario Description         | Steps                                                            | Expected Outcome                                   |
+|-------------|-----------------------------|------------------------------------------------------------------|----------------------------------------------------|
+| POS_SC_001  | Successful Registration     | 1. Enter valid details in all fields<br>2. Submit form           | User successfully registered                      |
+| POS_SC_002  | Minimum Required Fields     | 1. Enter mandatory fields only<br>2. Submit form                | User successfully registered with minimum data    |
+| NEG_SC_001  | Invalid Email Format        | 1. Enter email without '@' symbol<br>2. Submit form             | Error message displayed for invalid email format  |
+| NEG_SC_002  | Passwords Do Not Match      | 1. Enter different passwords<br>2. Submit form                  | Error message displayed for passwords not matching |
+
+---
+
+# Test Scripts (Cypress)
+
+### Example Test Scripts
+
+#### Scenario 1: Successful Registration
+
+```javascript
+describe('Successful Registration', () => {
+  it('Registers with valid inputs', () => {
+    cy.visit('/register');
+    cy.get('#fullName').type('John Doe');
+    cy.get('#email').type('johndoe@example.com');
+    cy.get('#password').type('securePassword');
+    cy.get('#confirmPassword').type('securePassword');
+    cy.get('#dob').type('1990-01-01');
+    cy.get('#gender').select('Male');
+    cy.get('#newsletter').check();
+    cy.get('#submitBtn').click();
+    cy.url().should('include', '/success');
+  });
+});
